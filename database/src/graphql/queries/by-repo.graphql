@@ -1,0 +1,38 @@
+query RespositoryQuery ($owner: String!, $name: String) {
+  repository(owner: $owner, name: $name) {
+    createdAt
+    updatedAt
+    url
+    name
+    homepageUrl
+    description
+    isArchived
+    repositoryTopics(first: 10) {
+      nodes {
+        id
+        url
+        topic {
+          id
+          name
+        }
+      }
+    }
+    languages(first: 10) {
+      nodes {
+        id
+        name
+      }
+    }
+    primaryLanguage {
+      id
+      name
+    }
+    forkCount
+    stargazers(first: 10) {
+      nodes {
+        name
+        id
+      }
+    }
+  }
+}

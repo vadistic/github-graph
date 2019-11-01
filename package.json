@@ -1,0 +1,37 @@
+{
+  "name": "github-graph",
+  "version": "0.1.7",
+  "private": true,
+  "description": "x",
+  "homepage": "https://vadistic.netlify.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vadistic/github-graph"
+  },
+  "license": "TBD",
+  "author": "Jakub Wadas <vadistic@gmail.com>",
+  "workspaces": [
+    "web",
+    "database"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "clean": "lerna run clean",
+    "format": "lerna run format",
+    "lint": "lerna run lint"
+  },
+  "dependencies": {
+    "@vadistic/eslint-config-base": "^0.1.7",
+    "@vadistic/eslint-config-node": "^0.1.7",
+    "@vadistic/eslint-config-react": "^0.1.7",
+    "@vadistic/prettier-config": "^0.1.7",
+    "@vadistic/scripts": "^0.1.7"
+  },
+  "devDependencies": {
+    "eslint": "6.6.0",
+    "jest": "24.9.0",
+    "lerna": "3.18.3",
+    "prettier": "1.18.2",
+    "typescript": "3.7.1-rc"
+  }
+}

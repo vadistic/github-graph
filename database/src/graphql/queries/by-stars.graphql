@@ -1,0 +1,15 @@
+query ByStars {
+  user(login: "vadistic") {
+    id
+    starredRepositories(first: 10) {
+      nodes {
+        id
+        name
+        nameWithOwner
+        description
+        url
+        forkCount
+      }
+    }
+  }
+}
