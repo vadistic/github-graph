@@ -1,9 +1,13 @@
-import { ServerResponse, IncomingMessage } from 'http'
+import dotenv from 'dotenv'
+import { loadUserStarredRepositories } from './load/one-user-stars'
+import { saveRDF, RDFBucket } from './utils/save-rdf'
 
-const handler = (req: IncomingMessage, res: ServerResponse) => {
-  console.log(req.url)
+dotenv.config()
 
-  res.end(`Hello`)
+const main = async () => {
+  const res = await loadUserStarredRepositories('vadistic')
+
+  saveRDF(res, RDFBucket.UserStars)
 }
 
-export default handler
+main()

@@ -1,0 +1,37 @@
+overwrite: true
+generates:
+  src/github/generated/codegen.ts:
+    schema: "src/github/generated/schema.json"
+    documents:
+      - src/github/**/*.graphql
+      - src/github/**/*.ts
+    plugins:
+      - typescript
+      - typescript-operations
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    config:
+      dedupeOperationSuffix: true
+      preResolveTypes: true
+
+  src/github/generated/graphql.ts:
+    schema: "src/github/generated/schema.json"
+    documents:
+      - src/github/**/*.graphql
+      - src/github/**/*.ts
+    plugins:
+      - typescript-document-nodes
+    config:
+      namePrefix: graphql
+      namingConvention: change-case#constantCase
+    hooks:
+      afterOneFileWrite:
+        - sed -i "s/import gql from 'graphql-tag'/import { gql } from '..\/..\/utils'/"
+        - prettier --write
+
+config:
+  scalars:
+    DateTime: string
+    JSON: { [key: string]: any }
+

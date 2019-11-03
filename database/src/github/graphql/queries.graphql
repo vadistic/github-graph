@@ -1,0 +1,55 @@
+query RepositoryBaseQuery($ids: [ID!]!) {
+  nodes(ids: $ids) {
+    ... on Repository {
+      ...RepositoryFragment
+    }
+  }
+}
+
+query UserStarsByLoginQuery($login: String!, $after: String) {
+  user(login: $login) {
+    id
+    starredRepositories(
+      first: 100
+      after: $after
+      orderBy: { field: STARRED_AT, direction: DESC }
+    ) {
+      edges {
+        starredAt
+        node {
+          id
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}
+
+query UserStarsByIdQuery($id: ID!, $after: String) {
+  node(id: $id) {
+    ... on User {
+      id
+      starredRepositories(
+        first: 100
+        after: $after
+        orderBy: { field: STARRED_AT, direction: DESC }
+      ) {
+        edges {
+          starredAt
+          node {
+            id
+          }
+        }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+}

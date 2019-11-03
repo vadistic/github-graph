@@ -21,16 +21,17 @@ As a user I want to:
 
 #### Library/ tools recommendations
 
-- I want to discover relevant tools and libraries
+I want to discover relevant tools and libraries
 
 #### Simmilar project recommendations
 
-- I want to find projects using specific stack
+I want to find projects using specific stack
 
 #### Same-minded users recomendations
 
-- I want to find users with simmilar stargazing patterns
-- I want to find users using simmilar stack in their projects
+I want to find users with simmilar stargazing patterns
+
+I want to find users using simmilar stack in their projects
 
 ### How I should be able to look?
 

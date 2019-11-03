@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  dgraph:
+    container_name: dgraph
+    image: dgraph/standalone:graphql
+    restart: unless-stopped
+    volumes:
+      - ./dgraph:/dgraph
+    networks:
+      - backend
+    ports:
+      # zero http+grpc
+      - 5080:5080
+      - 6080:6080
+      # alpha http+grpc
+      - 8080:8080
+      - 9080:9080
+      # ratel
+      - 8000:8000
+      # graphql
+      - 9000:9000
+
+networks:
+  backend:
+    name: backend

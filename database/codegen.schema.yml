@@ -1,0 +1,22 @@
+overwrite: true
+
+generates:
+  src/github/generated/schema.json:
+    schema:
+       - https://api.github.com/graphql:
+          headers:
+            Authorization: Bearer ${GITHUB_API_TOKEN}
+            Accept: application/vnd.github.hawkgirl-preview+json
+    plugins:
+      - introspection
+
+  src/github/generated/schema.graphql:
+    schema:
+       - https://api.github.com/graphql:
+          headers:
+            Authorization: Bearer ${GITHUB_API_TOKEN}
+            Accept: application/vnd.github.hawkgirl-preview+json
+    plugins:
+      - schema-ast
+
+# TODO: add dgraph graphql

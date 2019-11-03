@@ -1,0 +1,24 @@
+fragment RepositoryFragment on Repository {
+  id
+  name
+
+  owner {
+    id
+  }
+
+  watchers {
+    totalCount
+  }
+
+  stargazers {
+    totalCount
+  }
+
+  forks {
+    totalCount
+  }
+
+  issues {
+    totalCount
+  }
+}
