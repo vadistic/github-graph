@@ -12,7 +12,10 @@ const client = new GraphQLClient(GITHUB_API_ENDPOINT, {
   },
 })
 
-export const gh = async <Query, Variables>(query: string, variables: Variables): Promise<Query> => {
+export const githubClient = async <Query, Variables>(
+  query: string,
+  variables: Variables,
+): Promise<Query> => {
   let retry = 0
 
   const fetch = async <Query>(): Promise<Query> => {

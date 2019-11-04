@@ -8,12 +8,14 @@ generates:
     plugins:
       - typescript
       - typescript-operations
+      - add: '/* eslint-disable */'
+    config:
+      typesPrefix: Github
+      dedupeOperationSuffix: true
+      preResolveTypes: true
     hooks:
       afterOneFileWrite:
         - prettier --write
-    config:
-      dedupeOperationSuffix: true
-      preResolveTypes: true
 
   src/github/generated/graphql.ts:
     schema: "src/github/generated/schema.json"
@@ -22,12 +24,24 @@ generates:
       - src/github/**/*.ts
     plugins:
       - typescript-document-nodes
+      - add: '/* eslint-disable */'
     config:
       namePrefix: graphql
       namingConvention: change-case#constantCase
     hooks:
       afterOneFileWrite:
         - sed -i "s/import gql from 'graphql-tag'/import { gql } from '..\/..\/utils'/"
+        - prettier --write
+
+  src/dgraph/generated/codegen.ts:
+    schema: "src/dgraph/graphql/schema.graphql"
+    plugins:
+      - typescript
+      - add: '/* eslint-disable */'
+    config:
+      typesPrefix: Dgraph
+    hooks:
+      afterOneFileWrite:
         - prettier --write
 
 config:

@@ -1,13 +1,16 @@
 import dotenv from 'dotenv'
-import { loadUserStarredRepositories } from './load/one-user-stars'
-import { saveRDF, RDFBucket } from './utils/save-rdf'
+import { loadUserStars } from './load/one-user-stars'
+import { createDgraphClientStub, createDgraphClient } from './dgraph'
 
 dotenv.config()
 
 const main = async () => {
-  const res = await loadUserStarredRepositories('vadistic')
+  const dgraphStub = createDgraphClientStub()
+  const client = createDgraphClient(dgraphStub)
 
-  saveRDF(res, RDFBucket.UserStars)
+  await loadUserStars(client, 'vadistic')
+
+  dgraphStub.close()
 }
 
 main()

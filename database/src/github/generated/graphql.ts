@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { gql } from '../../utils'
 export const REPOSITORY_FRAGMENT = gql`
   fragment RepositoryFragment on Repository {

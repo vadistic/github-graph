@@ -6,8 +6,11 @@ export enum RDFBucket {
 }
 
 export const saveRDF = async (data: any, type: RDFBucket) => {
-  const filename = type + new Date().toISOString()
+  const timestamp = new Date().toISOString()
+
+  const filename = `${type}-${timestamp}.json`
+
   const filepath = path.join(process.cwd(), 'rdf', type, filename)
 
-  await fse.writeFile(filepath, data)
+  await fse.writeJSON(filepath, data)
 }
