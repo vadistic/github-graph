@@ -1,0 +1,84 @@
+directive @search(by: [String!]) on FIELD_DEFINITION
+directive @hasInverse(field: String) on FIELD_DEFINITION
+
+scalar DateTime
+
+type User {
+  id: ID!
+  xid: String! @search(by: ["hash"])
+
+  login: String! @search(by: ["hash", "term"])
+
+  stars: [Repository!] @hasInverse(field: "stargazers")
+  starsStatus: Status
+
+  repositories: [Repository!]
+  repositoriesStatus: Status
+}
+
+type Repository {
+  id: ID!
+  xid: String! @search(by: ["hash"])
+
+  name: String!
+  owner: String!
+
+  user: User
+
+  primaryLanguage: LanguageType
+
+  watchersCount: Int!
+  issuesCount: Int!
+  forksCount: Int!
+  stargazersCount: Int!
+
+  stargazers: [User!] @hasInverse(field: "stars")
+  stargazersStatus: Status!
+
+  manifests: [Manifest!]!
+  manifestsStatus: Status!
+}
+
+type Manifest {
+  id: ID!
+  xid: String! @search(by: ["hash"])
+
+  filename: String!
+  dependencies: [Dependency!]!
+}
+
+type Dependency {
+  id: ID!
+
+  packageName: String!
+  requirements: String!
+  type: DependencyType
+}
+
+type Status {
+  id: ID!
+
+  type: StatusType @search
+
+  startedAt: DateTime!
+  completedAt: DateTime! @search
+
+  pointer: String
+}
+
+enum StatusType {
+  EMPTY
+  IN_PROGRES
+  COMPLETED
+}
+
+enum LanguageType {
+  TypeScript
+  JavaScript
+}
+
+enum DependencyType {
+  DEP
+  DEV
+  PEER
+}
